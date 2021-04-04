@@ -11,10 +11,10 @@ import java.io.Serializable;
 public class DetaliOderId implements Serializable {
 
 
-    @Column(name = "id_oder")
+    @Column(name = "oder_id")
     private Long oder_ID;
 
-    @Column(name = "id_producst")
+    @Column(name = "product_id")
     private Long product_ID;
 
     public DetaliOderId() {

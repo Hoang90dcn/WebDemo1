@@ -23,8 +23,7 @@ public class CategoryServiceImpl implements ICategoryService {
     }
     @Override
     public List<CategoryEntity> findAll() {
-
-        return categoryRepo.findAll();
+        return categoryRepo.findAllDefault();
     }
     @Override
     public List<CategoryEntity> saveAll(List<CategoryEntity> list) {

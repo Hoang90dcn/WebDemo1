@@ -11,11 +11,17 @@ import java.util.List;
 @Entity
 @Table(name = "User")
 public class User extends BasicEntity {
-    @Column(name = "name")
-    private String name;
+    @Column(name = "fullname")
+    private String fullname;
 
-    @Column(name = "accout")
-    private String accout;
+    @Column(name = "account")
+    private String account;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "phone")
+    private String phone;
 
     @Column(name = "password")
     private String password;

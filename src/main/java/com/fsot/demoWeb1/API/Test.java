@@ -6,6 +6,7 @@ import com.fsot.demoWeb1.Auth.payload.LoginRequest;
 import com.fsot.demoWeb1.Auth.payload.LoginResponse;
 import com.fsot.demoWeb1.Auth.payload.RandomStuff;
 import com.fsot.demoWeb1.Repo.CommentRepo;
+import com.fsot.demoWeb1.Service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,12 +26,11 @@ public class Test {
     @Autowired
     private JwtTokenProvider tokenProvider;
 
+    @Autowired
+    private IUserService userService;
+
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticateUser(@RequestBody LoginRequest loginRequest) {
-
-        System.out.println(loginRequest.getUsername());
-        System.out.println(loginRequest.getPassword());
-
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
@@ -52,7 +52,10 @@ public class Test {
         if(tokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal()).length()==0){
             System.out.println("nooo");
         }
-        return ResponseEntity.ok(new LoginResponse(jwt));
+
+        return ResponseEntity.ok(new LoginResponse(
+                (userService.findById((tokenProvider.getUserIdFromJWT(jwt))).getFullname()),
+                jwt));
     }
 
 

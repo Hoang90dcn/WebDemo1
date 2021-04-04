@@ -25,9 +25,9 @@ public class UserAPI {
     @PostMapping("/login")
     User  login(@RequestBody User user)
     {
-        User t = service.findByAcAndPass(user.getAccout());
-        System.out.println(t.getName());
-        return service.findByAcAndPass(user.getAccout());
+        User t = service.findByAcAndPass(user.getAccount());
+        System.out.println(t.getFullname());
+        return service.findByAcAndPass(user.getAccount());
     }
     @GetMapping("/find-all-user")
     List<User> findAll()

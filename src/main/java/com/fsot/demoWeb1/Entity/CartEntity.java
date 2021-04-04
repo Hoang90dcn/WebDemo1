@@ -9,14 +9,14 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Cart")
+@Table(name = "Oder")
 public class CartEntity extends  BasicEntity {
-    @Column(name = "id_user")
-    private Long id_user;
+//    @Column(name = "id_user")
+//    private Long id_user;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_Id")
     private  User user;
 
     @Column(name = "total")

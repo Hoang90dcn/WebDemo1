@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public interface IKeyWordService {
-    List<KeyWordEntitySearch> findAll();
-    List<KeyWordEntitySearch> findOne();
-    List<KeyWordEntitySearch> findAllByKey(String key);
+//    List<KeyWordEntitySearch> findAll();
+//    List<KeyWordEntitySearch> findOne();
+//    List<KeyWordEntitySearch> findAllByKey(String key);
 }

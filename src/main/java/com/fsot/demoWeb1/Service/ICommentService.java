@@ -12,6 +12,6 @@ public interface ICommentService {
     List<CommentEntity> FindAllComment();
     List<CommentEntity> findByIdProduct(Long id);
     CommentEntity findById(Long id);
-    Page<CommentEntity> findAllCommentByProduct(Long id_category, int page);
+    Page<CommentEntity> findAllCommentByProduct(Long id_product, int page);
 
 }

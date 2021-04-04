@@ -28,7 +28,7 @@ public class CommentAPI {
     @PostMapping("/save-comment")
     CommentEntity saveComment(@RequestParam Long id_product ,@RequestBody CommentEntity comment)
     {
-        Long id_uer = tokenProvider.getUserIdFromJWT(comment.getToken());
+        Long id_uer = 1l; //tokenProvider.getUserIdFromJWT(comment.getToken());
         User user = new User();
         System.out.println(id_uer);
 
@@ -46,8 +46,8 @@ public class CommentAPI {
         return  service.findById(id);
     }
     @GetMapping("find-all-comment-by-product")
-    public Page<CommentEntity> findAllCommentByProduct(@RequestParam Long id_category,@RequestParam int page)
+    public Page<CommentEntity> findAllCommentByProduct(@RequestParam Long id_product,@RequestParam int page)
     {
-        return service.findAllCommentByProduct(id_category,page);
+        return service.findAllCommentByProduct(id_product,page);
     }
 }

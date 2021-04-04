@@ -2,10 +2,7 @@ package com.fsot.demoWeb1.Service.ServiceImpl;
 
 import com.fsot.demoWeb1.Auth.JWT.JwtTokenProvider;
 import com.fsot.demoWeb1.DTO.Cart;
-import com.fsot.demoWeb1.DTO.CartItem;
 import com.fsot.demoWeb1.Entity.CartEntity;
-import com.fsot.demoWeb1.Entity.DetailOder;
-import com.fsot.demoWeb1.Entity.Product.ProductEntity;
 import com.fsot.demoWeb1.Repo.CartRepo;
 import com.fsot.demoWeb1.Repo.DetailOderRepo;
 import com.fsot.demoWeb1.Service.ICartService;
@@ -17,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -60,7 +56,7 @@ public class CartServiceImpl implements ICartService {
 
     @Override
     public List<CartEntity> findAllNewCart(int page) {
-        Sort sort = Sort.by("created_date").ascending();
+        Sort sort = Sort.by("createdDate").ascending();
         Pageable pageable = PageRequest.of(page, 10,sort);
          return CartService.findAllNewCart(pageable);
 

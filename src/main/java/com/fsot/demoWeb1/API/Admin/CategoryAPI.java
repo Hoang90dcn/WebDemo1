@@ -13,10 +13,10 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+
 public class CategoryAPI {
     private  @Autowired
     CategoryServiceImpl service;
-
     @PostMapping("/add-Category")
     public ResponseEntity add_Category(@RequestBody CategoryEntity entity)
     {
@@ -30,15 +30,10 @@ public class CategoryAPI {
        }
     }
 
-
     @GetMapping("/find-all-category")
 
     public ResponseEntity find_all(){
         List<CategoryEntity> list = service.findAll();
-       if(list.size()>0)
-       {
-           return ResponseEntity.ok().body(list);
-       }
-       return  ResponseEntity.ok().body(new ResponEntity("Lưu không thành công",200) );
+        return ResponseEntity.ok().body(list);
     }
 }

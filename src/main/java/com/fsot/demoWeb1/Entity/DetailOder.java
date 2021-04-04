@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 @Data
 @Entity
-@Table(name = "tbl_detail_oder")
+@Table(name = "detail_Oder")
 public class DetailOder {
 
     @EmbeddedId
@@ -14,12 +14,12 @@ public class DetailOder {
 
     @ManyToOne
     @MapsId("oder_ID")
-    @JoinColumn(name = "id_oder")
+    @JoinColumn(name = "oder_id")
     private CartEntity oder;// id của giỏ hàng
 
     @ManyToOne
     @MapsId("product_ID")
-    @JoinColumn(name = "id_producst")
+    @JoinColumn(name = "product_id")
     private ProductEntity producst; // id của sản phẩm
 
 
@@ -28,6 +28,9 @@ public class DetailOder {
     private Long amount;
 
 
+    @Column(name = "price")
+    private Long price;
+    
 
     public DetailOder() {
         super();

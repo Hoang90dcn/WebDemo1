@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 
 public interface CommentRepo extends  JpaRepository<CommentEntity, Long> {
     @Query(value = "select * from demoweb1.comment where product_id =?1",nativeQuery = true)
-    Page<CommentEntity> findAllProductByCategory(Long id_category, Pageable pageable);
+    Page<CommentEntity> findAllProductByCategory(Long id_product, Pageable pageable);
 }

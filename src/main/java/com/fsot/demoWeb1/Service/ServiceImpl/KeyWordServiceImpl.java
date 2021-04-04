@@ -10,20 +10,20 @@ import java.util.List;
 
 @Service
 public class KeyWordServiceImpl implements IKeyWordService {
-    @Autowired
-    KeyWordRepo service;
-    @Override
-    public List<KeyWordEntitySearch> findAll() {
-        return service.findAll();
-    }
-
-    @Override
-    public List<KeyWordEntitySearch> findOne() {
-        return null;
-    }
-
-    @Override
-    public List<KeyWordEntitySearch> findAllByKey(String key) {
-        return service.findAllIdProduct(key);
-    }
+//    @Autowired
+//    KeyWordRepo service;
+//    @Override
+//    public List<KeyWordEntitySearch> findAll() {
+//        return service.findAll();
+//    }
+//
+//    @Override
+//    public List<KeyWordEntitySearch> findOne() {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<KeyWordEntitySearch> findAllByKey(String key) {
+//        return service.findAllIdProduct(key);
+//    }
 }

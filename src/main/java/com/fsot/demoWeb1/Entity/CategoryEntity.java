@@ -16,18 +16,17 @@ public class CategoryEntity  extends  BasicEntity{
     @Column(name="name", nullable = false)
     private  String name;
 
-    @Column(name = "Description")
+    @Column(name = "description")
     private  String description;
 
     @Column(name = "icon")
     private  String icon;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "categories")
+    @OneToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     private List<ProductEntity> myListProduct = new ArrayList<>();
 
     @OneToOne
-    @JoinColumn(name="id_parent")
+    @JoinColumn(name="parent_id")
     private CategoryEntity id_parent;
 
 }

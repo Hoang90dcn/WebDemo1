@@ -11,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface CartRepo extends JpaRepository<CartEntity, Long> {
-    @Query(value = "SELECT * FROM demoweb1.cart where confirm = 0",nativeQuery = true)
+    @Query(value = "SELECT * FROM demoweb1.oder where confirm = 0",nativeQuery = true)
     List<CartEntity> findAllNewCart(Pageable pageable);
 }

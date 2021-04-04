@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 //.antMatchers("/check-out/**").authenticated()// Tất cả các request này đều cần phải xác thực mới được truy cập
-                //.antMatchers("/admin/**").hasAnyAuthority("ADMIN")//truy cập với quyền là admin
+                .antMatchers("/admin/**").hasAnyAuthority("ADMIN")//truy cập với quyền là admin
                 .anyRequest().permitAll();//Cho phép tất cả mọi người truy cập vào các địa chỉ còn lại
 
         // Thêm một lớp Filter kiểm tra jwt

@@ -30,9 +30,6 @@ public class CartAPI {
     @Autowired
     DetailOderRepo detailOderService;
 
-
-
-
 //    @PostMapping("/add-item")
 //    ResponseEntity<ResponEntity> addCart(@RequestBody CartItem data, final ModelMap model,
 //                                         final HttpServletRequest request, final HttpServletResponse response)

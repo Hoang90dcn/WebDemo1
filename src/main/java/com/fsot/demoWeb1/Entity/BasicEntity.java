@@ -15,21 +15,20 @@ public abstract class BasicEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "createdBy")
     private String createdBy;
 
-    @Column
-
+    @Column(name = "createdDate")
     private Date createdDate = new Date();
 
-    @Column
+    @Column(name = "modifiedBy")
     private String modifiedBy;
 
-    @Column
+    @Column(name = "modifiedDate")
 
     private Date modifiedDate;
 
-    @Column(columnDefinition = "TINYINT")
+    @Column(name = "status",columnDefinition = "TINYINT")
     private boolean status;
 
 }

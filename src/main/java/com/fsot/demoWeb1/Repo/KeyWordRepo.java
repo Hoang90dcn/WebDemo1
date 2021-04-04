@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface KeyWordRepo  extends JpaRepository<KeyWordEntitySearch, Long>{
-
-    @Query(value = "SELECT * FROM demoweb1.key_word_search where keyword=?1", nativeQuery = true)
-    List<KeyWordEntitySearch> findAllIdProduct(String key);
+//@Repository
+public interface KeyWordRepo  {
+//extends JpaRepository<KeyWordEntitySearch, Long>
+//    @Query(value = "SELECT * FROM demoweb1.key_word_search where keyword=?1", nativeQuery = true)
+//    List<KeyWordEntitySearch> findAllIdProduct(String key);
 }

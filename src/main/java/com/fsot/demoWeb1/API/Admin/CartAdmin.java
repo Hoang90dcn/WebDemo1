@@ -14,7 +14,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/admin")
 public class CartAdmin {
     @Autowired
     ICartService cartService;
@@ -31,7 +31,6 @@ public class CartAdmin {
     public List<DetailOder> findAllNewCart1(@RequestParam Long id)
     {
         CartEntity cartEntity = cartRepo.findById(id).get();
-
         return  cartEntity.getListDetailOders();
     }
 
@@ -39,7 +38,6 @@ public class CartAdmin {
     public User findAllNewCart2(@RequestParam Long id)
     {
         CartEntity cartEntity = cartRepo.findById(id).get();
-
         return  cartEntity.getUser();
     }
 }

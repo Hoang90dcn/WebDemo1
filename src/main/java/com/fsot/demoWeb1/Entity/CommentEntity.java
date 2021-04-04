@@ -16,12 +16,12 @@ public class CommentEntity  extends  BasicEntity{
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_Id")
     private  User user;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_Id")
     private ProductEntity product;
 
     @Transient

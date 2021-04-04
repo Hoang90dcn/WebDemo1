@@ -46,14 +46,14 @@ public class CommentServiceImpl implements ICommentService {
     }
 
     @Override
-    public Page<CommentEntity> findAllCommentByProduct(Long id_category, int page) {
-        Sort sort = Sort.by("created_date").descending();
+    public Page<CommentEntity> findAllCommentByProduct(Long id_product, int page) {
+        Sort sort = Sort.by("createdDate").descending();
         Pageable pageable = PageRequest.of(page, 10,sort);
-        Page<CommentEntity> page1 =service.findAllProductByCategory(id_category,pageable);
+        Page<CommentEntity> page1 =service.findAllProductByCategory(id_product,pageable);
         for(CommentEntity item : page1)
         {
-            item.setUser_name(item.getUser().getName());
+            item.setUser_name("Huy Hoàng");
         }
-        return service.findAllProductByCategory(id_category,pageable);
+        return service.findAllProductByCategory(id_product,pageable);
     }
 }

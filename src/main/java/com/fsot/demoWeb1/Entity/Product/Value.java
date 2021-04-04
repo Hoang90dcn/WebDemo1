@@ -10,14 +10,17 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Value")
+@Table(name = "ValueOfAttribute")
 public class Value extends BasicEntity {
-    @Column(name = "value_Attribute")
-    private String value_Attribute;
+    @Column(name = "name")
+    private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "Attribute_Value",
-    joinColumns = {@JoinColumn(name = "id_Value")},
-    inverseJoinColumns = {@JoinColumn(name = "id_Attribute")})
-    private List<Attribute> list_Attribute = new ArrayList<>();
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(name = "Attribute_Value",
+//    joinColumns = {@JoinColumn(name = "id_Value")},
+//    inverseJoinColumns = {@JoinColumn(name = "id_Attribute")})
+//    private List<Attribute> list_Attribute = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Attribute Attribute_id = new Attribute();
 }
