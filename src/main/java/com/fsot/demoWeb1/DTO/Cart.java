@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Data
 public class Cart {
-    private String token;
+//    private String token;
     private  Long id_user;
     List<CartItem> list = new ArrayList<CartItem>();
     private Long tatol = new Long(0);

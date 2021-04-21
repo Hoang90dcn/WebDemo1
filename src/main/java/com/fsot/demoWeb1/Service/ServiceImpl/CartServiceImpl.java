@@ -2,7 +2,11 @@ package com.fsot.demoWeb1.Service.ServiceImpl;
 
 import com.fsot.demoWeb1.Auth.JWT.JwtTokenProvider;
 import com.fsot.demoWeb1.DTO.Cart;
+import com.fsot.demoWeb1.DTO.CartItem;
 import com.fsot.demoWeb1.Entity.CartEntity;
+import com.fsot.demoWeb1.Entity.DetailOder;
+import com.fsot.demoWeb1.Entity.Product.ProductEntity;
+import com.fsot.demoWeb1.Entity.User;
 import com.fsot.demoWeb1.Repo.CartRepo;
 import com.fsot.demoWeb1.Repo.DetailOderRepo;
 import com.fsot.demoWeb1.Service.ICartService;
@@ -14,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -35,7 +40,7 @@ public class CartServiceImpl implements ICartService {
 //
 //        cart.setTatol(cartEntity.getTotal());
 //        List<DetailOder> detailOderList = detailOderSevice.findAllByIdCart(id);
-//        cart.setId_user(cartEntity.getId_user());
+//        cart.setId_user(cartEntity.);
 //        for(DetailOder item : detailOderList)
 //        {
 //            CartItem cartItem = new CartItem();
@@ -64,39 +69,49 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public void saveCart(Cart cart) {
-//        try {
-//            for(CartItem item : cart.getList())
-//            {
-//                ProductEntity pro = prodcutService.findById(item.getProductId());
-//                item.setProductName(pro.getName());
-//                item.setPrice(pro.getPrice());
-//                item.setAvatar(pro.getAvatar());
-//                item.setThumnail(pro.getThumnail());
-//                item.setTotalMoney(item.getPrice()*item.getQuantity());
-//
-//                cart.setTatol(item.getTotalMoney()+cart.getTatol());
-//
-//            }
-//            System.out.println(tokenProvider.getUserIdFromJWT(cart.getToken()));
-//            CartEntity cartEntity = new CartEntity();
-//            cartEntity.setConfirm(false);
-//            cartEntity.setId_user(tokenProvider.getUserIdFromJWT(cart.getToken()));
-//            cartEntity.setTotal(cart.getTatol());
-//            cartEntity.setModifiedDate(new Date());
-//            cartEntity = CartService.save(cartEntity);
-//            for(CartItem item : cart.getList())
-//            {
-//                ProductEntity pro = prodcutService.findById(item.getProductId());
-//
-//                DetailOder detailOder = new DetailOder(cartEntity,pro,item.getQuantity());
-//                detailOderSevice.save(detailOder);
-//
-//            }
-//        }catch (Exception e)
-//        {
-//            System.out.println(e);
-//        }
+    public void saveCart(Cart cart, String token) {
+
+
+        try {
+            //convert DTO to entity
+            // tính tổng giỏ hàng
+            for(CartItem item : cart.getList())
+            {
+                ProductEntity pro = prodcutService.findById(item.getId());
+                item.setName(pro.getName());
+                item.setPrice(pro.getPrice());
+                item.setAvatar(pro.getAvatar());
+                cart.setTatol(item.getAmount()*item.getPrice()+cart.getTatol());
+
+            }
+
+            // tạo 1 giỏ hàng
+            CartEntity cartEntity = new CartEntity();
+            // mặc định chưa xác nhận
+            cartEntity.setConfirm(false);
+
+            //lấy id user
+            Long id_user = tokenProvider.getUserIdFromJWT(token);
+            // set tất cả các thuộc tính của giỏ hàng
+            User user = new User();
+            user.setId(id_user);
+            cartEntity.setUser(user);
+            cartEntity.setTotal(cart.getTatol());
+            cartEntity.setModifiedDate(new Date());
+            cartEntity = CartService.save(cartEntity);
+
+            for(CartItem item : cart.getList())
+            {
+                ProductEntity pro = prodcutService.findById(item.getId());
+                DetailOder detailOder = new DetailOder(cartEntity,pro,item.getAmount(),item.getPrice());
+                System.out.println();
+                detailOderSevice.save(detailOder);
+
+            }
+        }catch (Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     @Override

@@ -2,20 +2,12 @@ package com.fsot.demoWeb1.API;
 
 import com.fsot.demoWeb1.Auth.JWT.JwtTokenProvider;
 import com.fsot.demoWeb1.DTO.Cart;
-import com.fsot.demoWeb1.DTO.CartItem;
-import com.fsot.demoWeb1.DTO.ResponEntity;
-import com.fsot.demoWeb1.Entity.Product.ProductEntity;
+import com.fsot.demoWeb1.Entity.CartEntity;
 import com.fsot.demoWeb1.Repo.DetailOderRepo;
 import com.fsot.demoWeb1.Service.ICartService;
 import com.fsot.demoWeb1.Service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @CrossOrigin
 @RestController
@@ -27,8 +19,6 @@ public class CartAPI {
     private JwtTokenProvider tokenProvider;
     @Autowired
     private ICartService cartService;
-    @Autowired
-    DetailOderRepo detailOderService;
 
 //    @PostMapping("/add-item")
 //    ResponseEntity<ResponEntity> addCart(@RequestBody CartItem data, final ModelMap model,
@@ -94,8 +84,11 @@ public class CartAPI {
 //        return  ResponseEntity.ok(cart);
 //    }
     @PostMapping("/save-cart")
-    public void saveCart(@RequestBody Cart cart)
+    public CartEntity saveCart(@RequestHeader("X-Token") String token, @RequestBody Cart cart)
     {
-        cartService.saveCart(cart);
+
+        CartEntity entity = new CartEntity();
+        cartService.saveCart(cart,token);
+        return entity;
     }
 }

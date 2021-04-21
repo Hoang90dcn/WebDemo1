@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 @Service
 public interface IProductService {
-    ProductEntity saveProduct(String productDTO, Long category_id, MultipartFile avatar);
+    ProductEntity saveProduct(String productDTO, Long category_id, MultipartFile avatar, Long provider_id);
     ProductEntity findById(Long id);
     Page<ProductEntity> findAllByStatus(boolean status,int page);
     Page<ProductEntity> findAllByCategory(Long id_category, int page);

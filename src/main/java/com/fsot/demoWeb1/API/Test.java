@@ -5,6 +5,7 @@ import com.fsot.demoWeb1.Auth.User.CustomUserDetails;
 import com.fsot.demoWeb1.Auth.payload.LoginRequest;
 import com.fsot.demoWeb1.Auth.payload.LoginResponse;
 import com.fsot.demoWeb1.Auth.payload.RandomStuff;
+import com.fsot.demoWeb1.Entity.User;
 import com.fsot.demoWeb1.Repo.CommentRepo;
 import com.fsot.demoWeb1.Service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,16 @@ public class Test {
         return ResponseEntity.ok(new LoginResponse(
                 (userService.findById((tokenProvider.getUserIdFromJWT(jwt))).getFullname()),
                 jwt));
+    }
+    @GetMapping ("/info-user")
+    public User getUser(@RequestHeader("X-Token") String token)
+    {
+        Long id = tokenProvider.getUserIdFromJWT(token);
+        
+        System.out.println(token);
+        System.out.println(id);
+        return  userService.findById(id);
+      
     }
 
 

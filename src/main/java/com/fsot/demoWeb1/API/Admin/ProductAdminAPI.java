@@ -1,29 +1,17 @@
 package com.fsot.demoWeb1.API.Admin;
 
-import com.fsot.demoWeb1.DTO.ProductDTO;
 import com.fsot.demoWeb1.DTO.ResponEntity;
 import com.fsot.demoWeb1.Entity.CategoryEntity;
 import com.fsot.demoWeb1.Entity.Product.ProductEntity;
 import com.fsot.demoWeb1.Repo.ProductRepo;
 import com.fsot.demoWeb1.Service.IProductService;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.DateTimeException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -31,6 +19,8 @@ import java.util.List;
 public class ProductAdminAPI {
     @Autowired
     private IProductService service2;
+
+    @Autowired ProductRepo productRepo;
 
     @GetMapping("/find-all-product")
     public ResponseEntity findAll()
@@ -86,23 +76,27 @@ public class ProductAdminAPI {
     @PostMapping(value = "/save-test-product")
     public ResponseEntity saveData2(@RequestParam("product") String productDTO,
                                     @RequestParam("file") MultipartFile file,
-                                    @RequestParam Long category_id)
+                                    @RequestParam Long category_id,
+                                    @RequestParam Long provider_id
+    )
     {
+        System.out.println(provider_id);
         try{
-            service2.saveProduct(productDTO,category_id,file);
+            service2.saveProduct(productDTO,category_id,file,provider_id);
             return  ResponseEntity.ok().body(new ResponEntity("Lưu  thành công",200));
         }
         catch (Exception e)
         {
+            System.out.println(e);
             return ResponseEntity.badRequest().body(new ResponEntity("Lưu không thành công",400));
         }
 
     }
-    @DeleteMapping("/delete-product/{id}")
-    public ResponseEntity DELETE(@PathVariable Long id)
+    @DeleteMapping("/delete-product")
+    public ResponseEntity DELETE(@RequestParam Long product_id)
     {
         try{
-            service2.deleteProduct(id);
+            service2.deleteProduct(product_id);
             return  ResponseEntity.ok().body(new ResponEntity("Xoá Thành Công!!!",200));
         }
         catch (Exception e)
@@ -120,5 +114,16 @@ public class ProductAdminAPI {
         categoryEntity.setId(id_category);
         entity.setCategories(categoryEntity);
         //service.save(entity);
+    }
+
+
+    @PostMapping(value = "/test-file-up-load")
+    public ResponseEntity testfile(@RequestParam("file") MultipartFile file)
+    {
+        if(!file.isEmpty())
+        {
+            System.out.println("ok");
+        }
+       return  null;
     }
 }

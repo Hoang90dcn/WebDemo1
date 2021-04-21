@@ -1,17 +1,15 @@
 package com.fsot.demoWeb1.DTO;
 
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
 
 @Data
 
 public class CartItem {
-    private Long productId;
+    private Long id;
     private Long price;
-    private Long quantity;
+    private Long amount;
     private String avatar;
-    private  String thumnail;
-    private Long totalMoney;
-    private String productName;
+    private String name;
 
 }

@@ -38,12 +38,13 @@ public class DetailOder {
     }
 
 
-    public DetailOder(CartEntity oder, ProductEntity product, Long amount) {
+    public DetailOder(CartEntity oder, ProductEntity product, Long amount, Long price) {
         this.id = new DetaliOderId(oder.getId(),product.getId());
         System.out.println(oder.getId());
         System.out.println(product.getId());
         this.oder = oder;
         this.producst = product;
         this.amount = amount;
+        this.price = price;
     }
 }

@@ -1,13 +1,13 @@
 package com.fsot.demoWeb1.API;
 
 import com.fsot.demoWeb1.Auth.JWT.JwtTokenProvider;
-import com.fsot.demoWeb1.Entity.CategoryEntity;
 import com.fsot.demoWeb1.Entity.CommentEntity;
 import com.fsot.demoWeb1.Entity.User;
 import com.fsot.demoWeb1.Service.ICommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 @CrossOrigin
 @RestController
@@ -48,6 +48,7 @@ public class CommentAPI {
     @GetMapping("find-all-comment-by-product")
     public Page<CommentEntity> findAllCommentByProduct(@RequestParam Long id_product,@RequestParam int page)
     {
+
         return service.findAllCommentByProduct(id_product,page);
     }
 }

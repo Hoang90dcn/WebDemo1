@@ -1,5 +1,6 @@
 package com.fsot.demoWeb1.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fsot.demoWeb1.Entity.Product.ProductEntity;
 import lombok.Data;
 
@@ -27,6 +28,7 @@ public class ProviderEntity extends  BasicEntity {
     @Column(name = "logo", columnDefinition = "TEXT")
     private String logo;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade =  CascadeType.ALL)
     private List<ProductEntity> list_Product = new ArrayList<>();
 }

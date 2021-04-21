@@ -11,6 +11,6 @@ import java.util.List;
 public interface ICartService {
     Cart findById(Long id);
     List<CartEntity> findAllNewCart(int page);
-    void saveCart(Cart cart);
+    void saveCart(Cart cart, String token);
     Page<CartEntity> findAll();
 }

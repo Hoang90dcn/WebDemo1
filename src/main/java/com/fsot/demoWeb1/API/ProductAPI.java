@@ -36,12 +36,13 @@ public class ProductAPI {
     }
 
 
-    @GetMapping("/find-one/{id}")
+    @GetMapping("/find-one")
 
-    public ResponseEntity findById(@PathVariable Long id)
+    public ResponseEntity findById(@RequestParam Long product_id)
     {
         try {
-             ProductEntity productEntity = service.findById(id);
+             ProductEntity productEntity = service.findById(product_id);
+            System.out.println(productEntity.getCreatedDate().toString());
             return  ResponseEntity.ok().body(productEntity);
         }catch (NoSuchElementException e) {
             return ResponseEntity.badRequest().body((new ResponEntity("Không tìm thấy sản phẩm", 500)));
@@ -58,7 +59,6 @@ public class ProductAPI {
     @GetMapping("/test3")
     public Page<ProductEntity> test3(@RequestParam String key, @RequestParam int page)
     {
-
         return service.findByKeyWord(key,page);
     }
 

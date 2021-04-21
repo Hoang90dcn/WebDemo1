@@ -20,35 +20,32 @@ public class ProductEntity extends BasicEntity {
 
 
 
-    @JsonIgnore
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Category_Id")
     private CategoryEntity categories;
 
 
-//    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "Provider_Id")
+    private ProviderEntity provider ;
+
+
+    @JsonIgnore
     @OneToMany(mappedBy = "user", fetch =  FetchType.LAZY)
     private List<CommentEntity> listComment = new ArrayList<>();
 
-
-
-
-
-//    @JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "producst", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<DetailOder> listDetailOrders = new ArrayList<>();
 
-//    @JsonIgnore
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "Product_Attribute",
     joinColumns = {@JoinColumn(name = "Product_Id")},
     inverseJoinColumns = {@JoinColumn(name = "Attribute_Id")})
     private List<Attribute> list_Attribute = new ArrayList<>();
 
-//    @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "Provider_Id")
-    private ProviderEntity provider ;
 
 
     @Column(name = "Price")
@@ -58,11 +55,11 @@ public class ProductEntity extends BasicEntity {
     private Long deal;
 
 
-//    @JsonIgnore
+   @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Advertisement advertisement_id;
 
-//    @JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "product_Id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private  List<Image_ProductEntity> list_image = new ArrayList<>();
 

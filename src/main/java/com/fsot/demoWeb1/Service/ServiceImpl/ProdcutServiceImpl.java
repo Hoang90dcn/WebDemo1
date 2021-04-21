@@ -2,6 +2,7 @@ package com.fsot.demoWeb1.Service.ServiceImpl;
 
 import com.fsot.demoWeb1.Entity.CategoryEntity;
 import com.fsot.demoWeb1.Entity.Product.ProductEntity;
+import com.fsot.demoWeb1.Entity.ProviderEntity;
 import com.fsot.demoWeb1.Repo.ProductRepo;
 import com.fsot.demoWeb1.Service.IProductService;
 import com.google.gson.Gson;
@@ -28,11 +29,13 @@ public class ProdcutServiceImpl implements IProductService {
 
     ProductRepo proRepo;
     @Override
-    public ProductEntity saveProduct(String productDTO, Long category_id, MultipartFile file) {
+    public ProductEntity saveProduct(String productDTO, Long category_id, MultipartFile file,  Long provider_id) {
 
 
         Gson gson = new Gson();
         ProductEntity product = gson.fromJson(productDTO,ProductEntity.class);
+        System.out.println(productDTO);
+        System.out.println(product.getPrice());
         MultipartFile multipartFile = file;
         Date date = new Date();
         SimpleDateFormat df = new SimpleDateFormat("dd_MMM_yyyy_HH_mm_ss");
@@ -77,9 +80,16 @@ public class ProdcutServiceImpl implements IProductService {
         product.setCreatedDate(new Date());
         CategoryEntity categoryEntity = new CategoryEntity();
         categoryEntity.setId(category_id);
+        //
+        ProviderEntity providerEntity = new ProviderEntity();
+        providerEntity.setId(provider_id);
+        //
+        product.setProvider(providerEntity);
         product.setCategories(categoryEntity);
+        product.setRating(4.8);
 
         return proRepo.save(product);
+
 
 
     }
@@ -121,10 +131,11 @@ public class ProdcutServiceImpl implements IProductService {
         ProductEntity productEntity = proRepo.findById(id).get();
         if(productEntity!=null)
         {
-            productEntity.setStatus(false);
+            System.out.println(productEntity.isStatus());
+            productEntity.setStatus(!productEntity.isStatus());
+            proRepo.save(productEntity);
+
         }
-
-
     }
 
 

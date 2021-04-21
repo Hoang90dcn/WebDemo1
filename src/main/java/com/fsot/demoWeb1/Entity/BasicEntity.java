@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -28,7 +29,7 @@ public abstract class BasicEntity {
 
     private Date modifiedDate;
 
-    @Column(name = "status",columnDefinition = "TINYINT")
-    private boolean status;
+    @Column(name = "status",columnDefinition = "TINYINT", nullable=true)
+    private boolean status = true;
 
 }

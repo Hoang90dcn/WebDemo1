@@ -11,8 +11,6 @@ import java.util.List;
 @Entity
 @Table(name = "Oder")
 public class CartEntity extends  BasicEntity {
-//    @Column(name = "id_user")
-//    private Long id_user;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -31,10 +29,6 @@ public class CartEntity extends  BasicEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "oder")
     private List<DetailOder> listDetailOders = new ArrayList<>();
-
-
-
-
 
 
 }

@@ -22,6 +22,7 @@ public class CategoryEntity  extends  BasicEntity{
     @Column(name = "icon")
     private  String icon;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     private List<ProductEntity> myListProduct = new ArrayList<>();
 

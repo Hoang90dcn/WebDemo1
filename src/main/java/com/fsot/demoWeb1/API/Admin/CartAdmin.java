@@ -14,7 +14,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/admin")
 public class CartAdmin {
     @Autowired
     ICartService cartService;
