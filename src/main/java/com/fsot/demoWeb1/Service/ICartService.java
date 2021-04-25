@@ -10,7 +10,9 @@ import java.util.List;
 @Service
 public interface ICartService {
     Cart findById(Long id);
-    List<CartEntity> findAllNewCart(int page);
+    List<CartEntity> findAllNewCart();
     void saveCart(Cart cart, String token);
     Page<CartEntity> findAll();
+    CartEntity confirm(Long id_cart);
+    CartEntity cancelCart(Long id_cart);
 }

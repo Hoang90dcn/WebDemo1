@@ -13,9 +13,6 @@ import com.fsot.demoWeb1.Service.ICartService;
 import com.fsot.demoWeb1.Service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -34,36 +31,17 @@ public class CartServiceImpl implements ICartService {
 
     @Override
     public Cart findById(Long id) {
-//        Cart cart = new Cart();
-//        CartEntity cartEntity = CartService.findById(id).get();
-//        System.out.println(cartEntity.getListDetailOders().size());
-//
-//        cart.setTatol(cartEntity.getTotal());
-//        List<DetailOder> detailOderList = detailOderSevice.findAllByIdCart(id);
-//        cart.setId_user(cartEntity.);
-//        for(DetailOder item : detailOderList)
-//        {
-//            CartItem cartItem = new CartItem();
-//            ProductEntity pro = prodcutService.findById(item.getId().getProduct_ID());
-//
-//            cartItem.setProductId(item.getId().getProduct_ID());
-//            cartItem.setQuantity(item.getAmount());
-//            cartItem.setThumnail(pro.getThumnail());
-//            cartItem.setAvatar(pro.getAvatar());
-//            cartItem.setProductName(pro.getName());
-//            cartItem.setTotalMoney(item.getAmount()*pro.getPrice());
-//            cartItem.setPrice(pro.getPrice());
-//            cart.getList().add(cartItem);
-//        }
+
 
         return null;
     }
 
     @Override
-    public List<CartEntity> findAllNewCart(int page) {
-        Sort sort = Sort.by("createdDate").ascending();
-        Pageable pageable = PageRequest.of(page, 10,sort);
-         return CartService.findAllNewCart(pageable);
+    public List<CartEntity> findAllNewCart() {
+//        Sort sort = Sort.by("createdDate").ascending();
+//        Pageable pageable = PageRequest.of(page, 10,sort);
+        //pageable
+         return CartService.findAllNewCart();
 
 
     }
@@ -117,5 +95,25 @@ public class CartServiceImpl implements ICartService {
     @Override
     public Page<CartEntity> findAll() {
         return null;
+    }
+
+    @Override
+    public CartEntity confirm(Long id_cart) {
+        CartEntity cartEntity = CartService.findById(id_cart).get();
+        cartEntity.setConfirm(true);
+        cartEntity.setModifiedDate(new Date());
+        CartService.save(cartEntity);
+        return cartEntity;
+    }
+
+    @Override
+    public CartEntity cancelCart(Long id_cart) {
+        CartEntity cartEntity = CartService.findById(id_cart).get();
+        cartEntity.setStatus(false);
+        cartEntity.setModifiedDate(new Date());
+        CartService.save(cartEntity);
+
+
+        return cartEntity;
     }
 }

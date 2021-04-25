@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "Oder")
 public class CartEntity extends  BasicEntity {
 
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_Id")
     private  User user;
@@ -26,7 +26,7 @@ public class CartEntity extends  BasicEntity {
     @Column(name = "address",columnDefinition = "TEXT")
     private  String address;
 
-    @JsonIgnore
+   @JsonIgnore
     @OneToMany(mappedBy = "oder")
     private List<DetailOder> listDetailOders = new ArrayList<>();
 
