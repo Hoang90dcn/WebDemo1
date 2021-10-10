@@ -9,9 +9,12 @@ import java.util.List;
 public interface ICategoryService {
 
     CategoryEntity findById(Long id);
-    List<CategoryEntity> findAll();
+    List<CategoryEntity> findAll(Long id);
+    List<CategoryEntity> findAllDefaultWithStatus(Long id);
     List<CategoryEntity> saveAll(List<CategoryEntity> list);
     CategoryEntity add_Category(CategoryEntity categoey);
+    CategoryEntity updateStatus(Long id);
+    CategoryEntity updateCategory(Long id);
 
 
 

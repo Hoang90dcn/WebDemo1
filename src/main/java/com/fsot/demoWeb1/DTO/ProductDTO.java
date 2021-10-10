@@ -9,13 +9,13 @@ public class ProductDTO extends BasicDTO {
     private String avatar;
     private  Long price;
 
+    public ProductDTO() {
+    }
 
-
-    public ProductDTO(String name, String description, String avatar, Long price ) {
+    public ProductDTO(String name, String description, String avatar, Long price) {
         this.name = name;
         this.description = description;
         this.avatar = avatar;
         this.price = price;
-
     }
 }

@@ -10,7 +10,10 @@ import java.util.List;
 
 @Repository
 public interface CategoryRepo extends JpaRepository<CategoryEntity, Long> {
-    @Query(value = "select * from category where parent_id=1",nativeQuery = true)
-    List<CategoryEntity> findAllDefault();
+    @Query(value = "select * from category where parent_id=?1",nativeQuery = true)
+    List<CategoryEntity> findAllDefault(Long id);
+
+    @Query(value = "select * from category where parent_id=?1 and status=1",nativeQuery = true)
+    List<CategoryEntity> findAllDefaultWithStatus(Long id);
 
 }

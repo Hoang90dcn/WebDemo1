@@ -1,20 +1,27 @@
 package com.fsot.demoWeb1.API;
 
+import com.fsot.demoWeb1.DTO.CartDTO;
+import com.fsot.demoWeb1.DTO.UserDTO;
 import com.fsot.demoWeb1.Entity.User;
 import com.fsot.demoWeb1.Service.IUserService;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
-
+@CrossOrigin
 @RestController
+@RequestMapping("/api")
 public class UserAPI {
 
     @Autowired
     IUserService service;
+
+    @Autowired
+    ModelMapper mapper;
 
     @PostMapping("/dang-ky")
     User dangKy(@RequestBody User user)
@@ -22,16 +29,26 @@ public class UserAPI {
         return  service.save(user);
     }
 
-    @PostMapping("/login")
-    User  login(@RequestBody User user)
-    {
-        User t = service.findByAcAndPass(user.getAccount());
-        System.out.println(t.getFullname());
-        return service.findByAcAndPass(user.getAccount());
+    @PutMapping("/update-status")
+    User updateStatus(@RequestParam Long id){
+        return service.updateStatus(id);
+
     }
     @GetMapping("/find-all-user")
-    List<User> findAll()
+    List<UserDTO> findAll()
     {
-        return service.findAll();
+
+        Type listType = new TypeToken<List<UserDTO>>(){}.getType();
+        List<UserDTO>  list = mapper.map(service.findAll(), listType);
+
+        return list;
+    }
+    @PostMapping("/update-role")
+    UserDTO updateRole(@RequestBody UserDTO user)
+    {
+
+
+
+        return service.updateRoles(user);
     }
 }

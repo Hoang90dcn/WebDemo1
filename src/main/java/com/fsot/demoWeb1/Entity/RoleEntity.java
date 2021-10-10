@@ -17,7 +17,7 @@ public class RoleEntity extends BasicEntity {
     private  String description;
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
             joinColumns = { @JoinColumn(name = "role_id") },
             inverseJoinColumns = {@JoinColumn(name = "user_id") })

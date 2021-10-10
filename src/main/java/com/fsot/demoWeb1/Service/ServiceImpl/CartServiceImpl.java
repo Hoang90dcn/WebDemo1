@@ -75,6 +75,7 @@ public class CartServiceImpl implements ICartService {
             user.setId(id_user);
             cartEntity.setUser(user);
             cartEntity.setTotal(cart.getTatol());
+            cartEntity.setAddress(cart.getAddress());
             cartEntity.setModifiedDate(new Date());
             cartEntity = CartService.save(cartEntity);
 

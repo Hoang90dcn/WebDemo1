@@ -1,5 +1,6 @@
 package com.fsot.demoWeb1.API;
 
+import com.fsot.demoWeb1.DTO.ProductDTO;
 import com.fsot.demoWeb1.DTO.ResponEntity;
 import com.fsot.demoWeb1.Entity.Product.ProductEntity;
 import com.fsot.demoWeb1.Service.IKeyWordService;
@@ -60,6 +61,11 @@ public class ProductAPI {
     public Page<ProductEntity> test3(@RequestParam String key, @RequestParam int page)
     {
         return service.findByKeyWord(key,page);
+    }
+    @PutMapping("/update-product")
+    public void  updateProduct(@RequestBody ProductDTO productDTO)
+    {
+
     }
 
 }

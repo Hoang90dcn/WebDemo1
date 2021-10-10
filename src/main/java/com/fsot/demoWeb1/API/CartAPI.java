@@ -86,7 +86,7 @@ public class CartAPI {
     @PostMapping("/save-cart")
     public CartEntity saveCart(@RequestHeader("X-Token") String token, @RequestBody Cart cart)
     {
-
+        System.out.println(cart.getAddress());
         CartEntity entity = new CartEntity();
         cartService.saveCart(cart,token);
         return entity;

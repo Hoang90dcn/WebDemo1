@@ -11,10 +11,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepo extends JpaRepository<ProductEntity, Long> {
-    @Query(value = "select * from product where category_id =?1",nativeQuery = true)
+    @Query(value = "select * from product where category_id =?1 and status = 1",nativeQuery = true)
     Page<ProductEntity> findAllProductByCategory(Long id_category, Pageable pageable);
 
-    @Query(value = "select * from product where name like %:key%",nativeQuery = true)
+    @Query(value = "select * from product where name like %:key% and status = 1",nativeQuery = true)
     Page<ProductEntity> findByKeyWord(@Param("key") String key, Pageable pageable);
 
 //    @Query("SELECT m FROM Movie m WHERE m.title LIKE %:title%")
